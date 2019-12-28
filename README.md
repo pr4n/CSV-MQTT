@@ -18,8 +18,19 @@ Then the resulting MQTT Payload will be of the form,
   "School" : "dummy_school"
 }
 
-Now, I am assuming that one would want to loop through the publish part and hence, the code will assume that the .csv is constant and it will just publish the same set of data again and again.
+This fork replays data only once. This addresses use case where there are downstream jobs that are processing this data, and would only want to play it once.
+~Now, I am assuming that one would want to loop through the publish part and hence, the code will assume that the .csv is constant and it will just publish the same set of data again and again.~ 
 
 NOTE : It is a minimal code and anyone can tweak it to run for their needs.
 
 As far as dependncy goes, the user would require paho-mqtt. Once can find it in the python3 repository for pip.
+
+## Usage
+
+This fork adds support for specifying the mqtt broker, port, csv file, etc via environment variables.
+
+Complete Usage is
+
+`CSV_FILE_NAME=/path/to/file.csv MQTT_TOPIC="topic/to/send" MQTT_PORT=1883 MQTT_BROKER=localhost python csv_mqtt.py`
+
+The default values of MQTT_PORT is 1883 and that for MQTT_BROKER is localhost. 

@@ -2,12 +2,13 @@ import csv
 import json
 import time
 import paho.mqtt.client as mqtt
+import os
 
 # Configuration Parameters.
-CSV_FILE_NAME = "sample.csv"
-MQTT_TOPIC = "sample_topic"
-MQTT_PORT = 1883
-MQTT_BROKER = "sample_broker"
+CSV_FILE_NAME = os.environ.get("CSV_FILE_NAME", "sample.csv")
+MQTT_TOPIC = os.environ.get("MQTT_TOPIC", "sample_topic")
+MQTT_PORT = os.environ.get(int("MQTT_PORT"), 1883)
+MQTT_BROKER = os.environ.get("MQTT_BROKER" , "localhost")
 
 # Global variables.
 data_value = {}
@@ -48,11 +49,11 @@ client.on_connect = on_connect # On Connect Callback.
 client.on_publish = on_publish # On Publish Callback.
 client.connect(MQTT_BROKER, 1883, 60) # Connecting to the MQTT Broker.
 
-while 1:
-    for value in data_value:
-        temp_data_val = str(data_value[value]).replace("'", '"')
-        try:
-            client.publish(MQTT_TOPIC, temp_data_val)
-            time.sleep(1)
-        except:
-            print("Publish Failed.")
+
+for value in data_value:
+    temp_data_val = str(data_value[value]).replace("'", '"')
+    try:
+        client.publish(MQTT_TOPIC, temp_data_val)
+        time.sleep(1)
+    except:
+        print("Publish Failed.")
