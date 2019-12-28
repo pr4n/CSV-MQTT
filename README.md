@@ -29,8 +29,20 @@ As far as dependncy goes, the user would require paho-mqtt. Once can find it in 
 
 This fork adds support for specifying the mqtt broker, port, csv file, etc via environment variables.
 
-Complete Usage is
+Prerequisites:
 
+Create a virtual env (Optional):
+`python3 -m venv venv`
+
+Activate virtual env:
+`source venv/bin/activate`
+
+Install requirements:
+`pip install -r requirements.txt`
+
+Complete Usage is:
+
+To run the script:
 `CSV_FILE_NAME=/path/to/file.csv MQTT_TOPIC="topic/to/send" MQTT_PORT=1883 MQTT_BROKER=localhost python csv_mqtt.py`
 
 The default values of MQTT_PORT is 1883 and that for MQTT_BROKER is localhost. 
