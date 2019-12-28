@@ -77,7 +77,7 @@ class ProduceTOMQTTBroker:
                 self.mqtt_client.publish(MQTT_TOPIC, temp_data_val)
                 logging.info('published')
                 time.sleep(1)
-            except:
+            except (KeyError, KeyboardInterrupt):
                 print("Publish Failed.")
 
 
